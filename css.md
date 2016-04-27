@@ -296,19 +296,19 @@ user-select:none;
   ```css
     input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
         -webkit-appearance: none !important;
-        margin: 0; 
+        margin: 0;
     }
   ```
   - Firefox下：
   ```css
     input[type="number"]{-moz-appearance:textfield;}
   ```
-    
+
   - 第二种方案：
     - 将type="number"改为type="tel"，同样是数字键盘，但是没有箭头。
-    
+
 - [HTML5手机浏览直接给一个号码打电话，发短信](http://java-er.com/blog/html5-mobile-call-sms/)
-  
+
 ```html
 <a href="tel:15222222222">移动WEB页面JS一键拨打号码咨询功能</a>
 <a href="sms:15222222222">移动WEB页面JS一键发送短信咨询功能</a>
@@ -321,7 +321,7 @@ user-select:none;
 ```css
 @media screen and (orientation: portrait) {
   /*竖屏 css*/
-} 
+}
 @media screen and (orientation: landscape) {
   /*横屏 css*/
 }
@@ -330,13 +330,13 @@ user-select:none;
 ```javascript
 //判断手机横竖屏状态：
 window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
-        if (window.orientation === 180 || window.orientation === 0) { 
+        if (window.orientation === 180 || window.orientation === 0) {
             alert('竖屏状态！');
-        } 
-        if (window.orientation === 90 || window.orientation === -90 ){ 
+        }
+        if (window.orientation === 90 || window.orientation === -90 ){
             alert('横屏状态！');
         }  
-    }, false); 
+    }, false);
 //移动端的浏览器一般都支持window.orientation这个参数，通过这个参数可以判断出手机是处在横屏还是竖屏状态。
 ```
 
@@ -357,7 +357,7 @@ window.addEventListener("onorientationchange" in window ? "orientationchange" : 
     - [MobileWeb 适配总结](http://www.w3ctech.com/topic/979)
     - [移动端web app自适应布局探索与总结](http://www.html-js.com/article/JavaScript-learning-notes%203234)
     - 公式
-        
+
         ```javascript
         var PAGE_MAX_WIDTH = 1280,
             BASE_FONT_SIZE = 50;
@@ -371,4 +371,29 @@ window.addEventListener("onorientationchange" in window ? "orientationchange" : 
             n();
         }());
         ```
-    
+
+        ```css
+          /*sass 下自动转换rem*/
+
+          /*开发默认设备宽度*/
+          $baseWidth: 320 !default;
+          /*设计图宽度*/
+          $planWidth: 720 !default;
+          /*默认root字体大小*/
+          $baseRootFontSize: 20px !default;
+
+          @function pxConverter($px) {
+            $ratio: ($planWidth / $baseWidth);
+            @if $baseFontType == rem {
+              @return $px / $baseRootFontSize / $ratio * 1rem;
+            } @else {
+              @return $px / $ratio;
+            }
+          }
+
+          /*demo*/
+          .nav {
+            height: pxConverter(45px);
+            width: 100%;
+          }
+        ```
